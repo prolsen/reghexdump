@@ -57,19 +57,6 @@ def getBinaryEntries(reg, size, write=None, api_key=None, depth=None):
                             
             except TypeError:
                 continue
-            
-def getNonBinary(reg, size, write=None, api_key=None, depth=None):
-    for subkey in reg.subkeys():
-        getNonBinary(subkey, size, write, depth + 1)
-        for values in subkey.values():
-            try:
-                if values.value_type() != Registry.RegBin:
-                    value = values.value()
-                    names = values.name()
-                    if len(values.value()) >= size:
-                        print names, len(values.value()), value[:10]
-            except TypeError:
-                continue
 
 def getVTResults(md5hash, api_key):
     if api_key is not None:
@@ -132,13 +119,7 @@ def main():
             getBinaryEntries(reg, int(args.size), args.write, api_key, depth=0)
         except TypeError:
             pass
-    else:
-        write = args.write
-        try:
-            reg = Registry.Registry(args.hive).root()
-            getBinaryEntries(reg, int(args.size), args.write, api_key, depth=0)        
-        except TypeError:
-            pass
+
 if __name__ == "__main__":
     main()
     
