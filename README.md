@@ -1,3 +1,28 @@
+# regdump
+Searches a registry hive for large string sizes and large binary blobs in an effrot to identify fileless malware among others.
+
+# Help
+
+Play with the sizes a bit. Sizes are in bytes.
+
+python regdump.py -h
+
+    usage: regdump.py [-h] --hive HIVE -b BSIZE -s SSIZE
+
+    Parses a registry hive looking fileless malware.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --hive HIVE           Path to Hive.
+      -b BSIZE, --bsize BSIZE
+                        Binary size in bytes.
+      -s SSIZE, --ssize SSIZE
+                        String size in bytes.
+
+# Example
+
+    python regdump.py --hive NTUSER.DAT --ssize 200 --bsize 50000
+
 # reghexdump
 Windows Registry parser that outputs values in hex. Also allows searching for a binary blob size.  Contribution settings 
 
